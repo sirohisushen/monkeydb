@@ -9,7 +9,7 @@ from datetime import datetime
 class StorageEngine:
     def __init__(self, base_path: str = 'database_storage'):
         """
-        Initialize the storage engine with a base storage path as of now
+        Initialize the storage engine with a base storage path
 
         Args:
             base_path (str): Base directory for storing database files
@@ -23,7 +23,7 @@ class StorageEngine:
         Create a new table file
 
         Args:
-            table_name (str): Name of the table created
+            table_name (str): Name of the table
 
         Returns:
             str: Path to the created table file
@@ -35,10 +35,10 @@ class StorageEngine:
 
     def write_data(self, table_name: str, data: List[Dict[str, Any]]):
         """
-        Write data to a table file created
+        Write data to a table file
 
         Args:
-            table_name (str): Name of the table to write data to
+            table_name (str): Name of the table
             data (List[Dict]): Data to write
         """
         table_path = os.path.join(self.base_path, f"{table_name}.json")
@@ -48,10 +48,10 @@ class StorageEngine:
 
     def read_data(self, table_name: str) -> List[Dict[str, Any]]:
         """
-        Read data from a table file created
+        Read data from a table file
 
         Args:
-            table_name (str): Name of the table to read data from
+            table_name (str): Name of the table
 
         Returns:
             List[Dict]: Data from the table
@@ -170,13 +170,13 @@ class DatabaseEngine:
 
     def execute_query(self, query: str) -> Union[List[Dict], None]:
         """
-        Execute a query very similar to SQL
+        Execute a SQL-like query
 
         Args:
             query (str): Query to execute
 
         Returns:
-            Result of the query executed
+            Result of the query
         """
         query = query.strip()
 
@@ -225,14 +225,14 @@ class DatabaseEngine:
 
         
         record = dict(zip(columns, values))
-        record['id'] = str(uuid.uuid4()) 
+        record['id'] = str(uuid.uuid4())  
         record['created_at'] = datetime.now().isoformat()
 
        
         existing_data = self.storage_engine.read_data(table_name)
         existing_data.append(record)
 
-        
+       
         self.storage_engine.write_data(table_name, existing_data)
         return "Record inserted successfully"
 
@@ -255,18 +255,18 @@ class DatabaseEngine:
       print("Debug - Where Clause:", where_clause)  
 
       if where_clause:
-          
+      
           filtered_data = []
           for record in data:
               try:
                   
                   field, value = [part.strip() for part in where_clause.split('=')]
-                  value = value.strip("'\"")  
+                  value = value.strip("'\"") 
 
                   print(f"Debug - Checking: {field} == {value}")  
-                  print(f"Debug - Record: {record}") 
+                  print(f"Debug - Record: {record}")
 
-                   
+                 
                   if str(record.get(field)) == str(value):
                       filtered_data.append(record)
               except Exception as e:
@@ -283,3 +283,26 @@ class DatabaseEngine:
           if columns[0] != '*':
               return [{col: record.get(col) for col in columns} for record in data]
           return data
+
+
+if __name__ == "__main__":
+    db = DatabaseEngine()
+
+    
+    print(db.execute_query("CREATE TABLE users (id TEXT, name TEXT, age INT)"))
+
+   
+    print(db.execute_query("INSERT INTO users (id, name, age) VALUES ('1', 'Shane', 16)"))
+    print(db.execute_query("INSERT INTO users (id, name, age) VALUES ('2', 'Ceasor', 54)"))
+
+    
+    users = db.execute_query("SELECT * FROM users")
+    print("Users:", users)
+
+    
+    filtered_users = db.execute_query("SELECT * FROM users WHERE id = '1'")
+    print("Filtered Users:", filtered_users)
+
+    
+    name_filtered_users = db.execute_query("SELECT * FROM users WHERE name = 'Alice'")
+    print("Name Filtered Users:", name_filtered_users)
