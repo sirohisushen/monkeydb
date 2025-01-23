@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MonkeyDB is a lightweight, pure Python database engine with basic SQL-like functionality.">
+    <meta name="keywords" content="MonkeyDB, Python, database, SQL, JSON">
+    <meta name="author" content="Your Name">
+    <title>MonkeyDB Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-blue-600 text-white p-4 flex items-center">
+        <img src="logo.webp" alt="MonkeyDB Logo" class="rounded-2xl h-12 mr-4"> <!-- Replace with your logo URL -->
+        <h1 class="text-3xl font-bold">MonkeyDB Documentation</h1>
+        <nav class="mt-2 ml-auto">
+            <a href="#overview" class="mr-4 hover:underline">Overview</a>
+            <a href="#features" class="mr-4 hover:underline">Features</a>
+            <a href="#installation" class="mr-4 hover:underline">Installation</a>
+            <a href="#usage" class="mr-4 hover:underline">Usage</a>
+            <a href="#api" class="hover:underline">API Reference</a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-6">
+        <section id="overview" class="mb-8">
+            <h2 class="text-2xl font-semibold">Overview</h2>
+            <p>MonkeyDB is a lightweight, pure Python database engine with basic SQL-like functionality. It is designed for simplicity and ease of use, making it ideal for small projects and educational purposes.</p>
+        </section>
+
+        <section id="features" class="mb-8">
+            <h2 class="text-2xl font-semibold">Features</h2>
+            <ul class="list-disc list-inside">
+                <li>Create tables with specified columns and data types.</li>
+                <li>Insert records into tables with automatic ID generation.</li>
+                <li>Select and filter records based on conditions.</li>
+                <li>JSON-based storage for easy data management.</li>
+                <li>Thread-safe operations for concurrent access.</li>
+            </ul>
+        </section>
+
+        <section id="installation" class="mb-8">
+            <h2 class="text-2xl font-semibold">Installation</h2>
+            <p>To install MonkeyDB, follow these steps:</p>
+            <pre class="bg-gray-200 p-4 rounded"><code>pip install monkeydb</code></pre>
+        </section>
+
+        <section id="usage" class="mb-8">
+            <h2 class="text-2xl font-semibold">Usage</h2>
+            <h3 class="text-xl font-semibold">Step-by-Step Guide to Use MonkeyDB</h3>
+            <ol class="list-decimal list-inside mb-4">
+                <li>Make a new folder for your project.</li>
+                <li>In the same directory as your root Python file, create a new Python file named <code>monkeyDB.py</code>.</li>
+                <li>Include MonkeyDB in your Python file using the following import statement:</li>
+                <pre class="bg-gray-200 p-4 rounded"><code>from monkeydb import DatabaseEngine</code></pre>
+                <li>Initialize the database engine:</li>
+                <pre class="bg-gray-200 p-4 rounded"><code>db = DatabaseEngine()</code></pre>
+                <li>Create a table:</li>
+                <pre class="bg-gray-200 p-4 rounded"><code>db.execute_query("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")</code></pre>
+                <li>Insert records into the table:</li>
+                <pre class="bg-gray-200 p-4 rounded"><code>db.execute_query("INSERT INTO users (id, name, age) VALUES (1, 'Alice', 30)")</code></pre>
+                <li>Select records from the table:</li>
+                <pre class="bg-gray-200 p-4 rounded"><code>results = db.execute_query("SELECT * FROM users WHERE age = 30")</code></pre>
+                <li>Print the results:</li>
+                <pre class="bg-gray-200 p-4 rounded"><code>print(results)</code></pre>
+            </ol>
+            <h3 class="text-xl font-semibold">Example Code</h3>
+            <pre class="bg-gray-200 p-4 rounded"><code>
+# monkeyDB.py
+from monkeydb import DatabaseEngine
+
+# Initialize the database engine
+db = DatabaseEngine()
+
+# Create a table
+db.execute_query("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+
+# Insert records
+db.execute_query("INSERT INTO users (id, name, age) VALUES (1, 'Alice', 30)")
+db.execute_query("INSERT INTO users (id, name, age) VALUES (2, 'Bob', 25)")
+
+# Select records
+results = db.execute_query("SELECT * FROM users WHERE age = 30")
+print(results)
+            </code></pre>
+        </section>
+
+        <section id="api" class="mb-8">
+            <h2 class="text-2xl font-semibold">API Reference</h2>
+            <h3 class="text-xl font-semibold">StorageEngine</h3>
+            <p>Handles the storage of data in JSON files.</p>
+            <ul>
+                <li><strong>create_table_file(table_name: str) -> str</strong>: Creates a new table file.</li>
+                <li><strong>write_data(table_name: str, data: List[Dict[str, Any]])</strong>: Writes data to a table file.</li>
+                <li><strong>read_data(table_name: str) -> List[Dict[str, Any]]</strong>: Reads data from a table file.</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold">QueryParser</h3>
+            <p>Parses SQL-like queries.</p>
+            <ul>
+                <li><strong>parse_create_table(query: str) -> Dict[str, Any]</strong>: Parses CREATE TABLE queries.</li>
+                <li><strong>parse_insert(query: str) -> Dict[str, Any]</strong>: Parses INSERT queries.</li>
+                <li><strong>parse_select(query: str) -> Dict[str, Any]</strong>: Parses SELECT queries.</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold">DatabaseEngine</h3>
+            <p>Handles the execution of queries and manages tables.</p>
+            <ul>
+                <li><strong>execute_query(query: str) -> Union[List[Dict], None]</strong>: Executes a SQL-like query.</li>
+                <li><strong>_create_table(parsed_query: Dict[str, Any])</strong>: Creates a new table.</li>
+                <li><strong>_insert(parsed_query: Dict[str, Any])</strong>: Inserts data into a table.</li>
+                <li><strong>_select(parsed_query: Dict[str, Any])</strong>: Selects data from a table.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white p-4 text-center">
+        <p>&copy; 2025 MonkeyDB. All rights reserved.</p>
+    </footer>
+</body>
+</html>
