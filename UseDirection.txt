@@ -1,0 +1,4 @@
+To use monkeyDB ->
+1. Make a new folder
+2. In the same directory as the root python file, make a new python file named 'monkeyDB.py'
+3. Include monkeyDB in python file using ""from monkeydb import DatabaseEngine""
