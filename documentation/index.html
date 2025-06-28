@@ -1,121 +1,198 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="default" style="--main-bg-color: #f3f4f6; --main-text-color: #1f2937;">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MonkeyDB is a lightweight, pure Python database engine with basic SQL-like functionality.">
-    <meta name="keywords" content="MonkeyDB, Python, database, SQL, JSON">
-    <meta name="author" content="Your Name">
-    <title>MonkeyDB Documentation</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="description" content="MonkeyDB is a lightweight, pure Python database engine with basic SQL-like functionality." />
+    <meta name="keywords" content="MonkeyDB, Python, database, SQL, JSON, lightweight, engine, storage, concurrency" />
+    <meta name="author" content="Sushen Sirohi" />
+    <title>MonkeyDB Documentation — A Lightweight Python DB Engine</title>
+
+    <!-- Tailwind CSS CDN with integrity and cross-origin -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+      integrity="sha384-RWJ4dOLfxw+EOvHEQ5qALr8zN62r8F9LBHZ9HsZrXAPjv/H+OW6V9+aR0vW/kb3X"
+      crossorigin="anonymous"
+      media="all"
+    />
+
+    <style>
+        /* Custom overrides and verbose style rules */
+        body {
+            background-color: var(--main-bg-color);
+            color: var(--main-text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+        header nav a {
+            transition-property: color, border-color;
+            transition-duration: 250ms;
+            transition-timing-function: ease-in-out;
+        }
+        header nav a:hover {
+            text-decoration: underline;
+            color: #2563eb;
+        }
+        footer p {
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+        }
+        code {
+            font-family: 'Source Code Pro', monospace, monospace;
+            font-size: 0.875rem;
+            background-color: #e5e7eb;
+            padding: 0.375rem 0.5rem;
+            border-radius: 0.375rem;
+            user-select: all;
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
-    <header class="bg-blue-600 text-white p-4 flex items-center">
-        <img src="logo.webp" alt="MonkeyDB Logo" class="rounded-2xl h-12 mr-4"> <!-- Replace with your logo URL -->
-        <h1 class="text-3xl font-bold">MonkeyDB Documentation</h1>
-        <nav class="mt-2 ml-auto">
-            <a href="#overview" class="mr-4 hover:underline">Overview</a>
-            <a href="#features" class="mr-4 hover:underline">Features</a>
-            <a href="#installation" class="mr-4 hover:underline">Installation</a>
-            <a href="#usage" class="mr-4 hover:underline">Usage</a>
-            <a href="#api" class="hover:underline">API Reference</a>
+
+<body class="bg-gray-100 text-gray-800 leading-relaxed">
+    <header class="bg-blue-600 text-white p-5 flex items-center justify-between flex-wrap max-w-screen-xl mx-auto">
+        <div class="flex items-center space-x-4">
+            <img
+                src="logo.webp"
+                alt="MonkeyDB Logo"
+                loading="lazy"
+                decoding="async"
+                width="48"
+                height="48"
+                class="rounded-2xl drop-shadow-lg"
+                style="filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2));"
+            />
+            <h1 class="text-3xl font-extrabold tracking-wide select-none" aria-label="MonkeyDB Documentation Title">
+                MonkeyDB Documentation
+            </h1>
+        </div>
+        <nav aria-label="Primary navigation" class="mt-3 sm:mt-0">
+            <ul class="flex space-x-6 text-lg font-medium">
+                <li><a href="#overview" class="hover:underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">Overview</a></li>
+                <li><a href="#features" class="hover:underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">Features</a></li>
+                <li><a href="#installation" class="hover:underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">Installation</a></li>
+                <li><a href="#usage" class="hover:underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">Usage</a></li>
+                <li><a href="#api" class="hover:underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">API Reference</a></li>
+            </ul>
         </nav>
     </header>
 
-    <main class="container mx-auto p-6">
-        <section id="overview" class="mb-8">
-            <h2 class="text-2xl font-semibold">Overview</h2>
-            <p>MonkeyDB is a lightweight, pure Python database engine with basic SQL-like functionality. It is designed for simplicity and ease of use, making it ideal for small projects and educational purposes.</p>
-        </section>
+    <main class="max-w-screen-lg mx-auto p-8 space-y-14" role="main" aria-label="MonkeyDB documentation main content">
+        <article id="overview" class="prose prose-lg max-w-none" tabindex="0">
+            <h2>Overview</h2>
+            <p>
+                MonkeyDB is a lightweight, pure Python database engine with basic SQL-like functionality.
+                It is meticulously designed for simplicity, ease of integration, and educational utility,
+                making it an ideal choice for small-scale projects and Python learners.
+            </p>
+        </article>
 
-        <section id="features" class="mb-8">
-            <h2 class="text-2xl font-semibold">Features</h2>
+        <article id="features" class="prose prose-lg max-w-none" tabindex="0">
+            <h2>Features</h2>
             <ul class="list-disc list-inside">
-                <li>Create tables with specified columns and data types.</li>
-                <li>Insert records into tables with automatic ID generation.</li>
-                <li>Select and filter records based on conditions.</li>
-                <li>JSON-based storage for easy data management.</li>
-                <li>Thread-safe operations for concurrent access.</li>
+                <li>Create tables with specified columns and explicit data types.</li>
+                <li>Insert records into tables with automated unique ID generation.</li>
+                <li>Execute SELECT queries with filtering capabilities based on WHERE clauses.</li>
+                <li>Utilizes JSON files for backend storage enabling human-readable persistence.</li>
+                <li>Employs thread-safe locking mechanisms to ensure concurrency safety.</li>
             </ul>
-        </section>
+        </article>
 
-        <section id="installation" class="mb-8">
-            <h2 class="text-2xl font-semibold">Installation</h2>
-            <p>To install MonkeyDB, follow these steps:</p>
-            <pre class="bg-gray-200 p-4 rounded"><code>pip install monkeydb</code></pre>
-        </section>
+        <article id="installation" class="prose prose-lg max-w-none" tabindex="0">
+            <h2>Installation</h2>
+            <p>Install MonkeyDB with the Python package manager <code>pip</code>:</p>
+            <pre class="rounded-md bg-gray-200 p-4 overflow-x-auto" tabindex="0"><code>pip install monkeydb</code></pre>
+        </article>
 
-        <section id="usage" class="mb-8">
-            <h2 class="text-2xl font-semibold">Usage</h2>
-            <h3 class="text-xl font-semibold">Step-by-Step Guide to Use MonkeyDB</h3>
-            <ol class="list-decimal list-inside mb-4">
-                <li>Make a new folder for your project.</li>
-                <li>In the same directory as your root Python file, create a new Python file named <code>monkeyDB.py</code>.</li>
-                <li>Include MonkeyDB in your Python file using the following import statement:</li>
-                <pre class="bg-gray-200 p-4 rounded"><code>from monkeydb import DatabaseEngine</code></pre>
-                <li>Initialize the database engine:</li>
-                <pre class="bg-gray-200 p-4 rounded"><code>db = DatabaseEngine()</code></pre>
-                <li>Create a table:</li>
-                <pre class="bg-gray-200 p-4 rounded"><code>db.execute_query("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")</code></pre>
-                <li>Insert records into the table:</li>
-                <pre class="bg-gray-200 p-4 rounded"><code>db.execute_query("INSERT INTO users (id, name, age) VALUES (1, 'Alice', 30)")</code></pre>
-                <li>Select records from the table:</li>
-                <pre class="bg-gray-200 p-4 rounded"><code>results = db.execute_query("SELECT * FROM users WHERE age = 30")</code></pre>
-                <li>Print the results:</li>
-                <pre class="bg-gray-200 p-4 rounded"><code>print(results)</code></pre>
+        <article id="usage" class="prose prose-lg max-w-none" tabindex="0">
+            <h2>Usage</h2>
+            <h3>Step-by-Step Guide to Use MonkeyDB</h3>
+            <ol class="list-decimal list-inside space-y-2 mb-6">
+                <li>Create a dedicated folder to contain your MonkeyDB project files.</li>
+                <li>Inside the same directory as your root Python script, create a new Python file named <code>monkeyDB.py</code>.</li>
+                <li>Import the MonkeyDB engine with the statement:
+                    <pre class="bg-gray-200 p-4 rounded"><code>from monkeydb import DatabaseEngine</code></pre>
+                </li>
+                <li>Instantiate the database engine object:
+                    <pre class="bg-gray-200 p-4 rounded"><code>db = DatabaseEngine()</code></pre>
+                </li>
+                <li>Create a new table specifying columns and their data types:
+                    <pre class="bg-gray-200 p-4 rounded"><code>db.execute_query("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")</code></pre>
+                </li>
+                <li>Insert data entries into your table:
+                    <pre class="bg-gray-200 p-4 rounded"><code>db.execute_query("INSERT INTO users (id, name, age) VALUES (1, 'Alice', 30)")</code></pre>
+                </li>
+                <li>Retrieve records with a SELECT statement optionally filtered by criteria:
+                    <pre class="bg-gray-200 p-4 rounded"><code>results = db.execute_query("SELECT * FROM users WHERE age = 30")</code></pre>
+                </li>
+                <li>Output the selected records:
+                    <pre class="bg-gray-200 p-4 rounded"><code>print(results)</code></pre>
+                </li>
             </ol>
-            <h3 class="text-xl font-semibold">Example Code</h3>
-            <pre class="bg-gray-200 p-4 rounded"><code>
+
+            <h3>Example Code</h3>
+            <pre class="bg-gray-200 p-6 rounded overflow-x-auto" tabindex="0"><code>
 # monkeyDB.py
 from monkeydb import DatabaseEngine
 
-# Initialize the database engine
 db = DatabaseEngine()
 
-# Create a table
 db.execute_query("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
 
-# Insert records
 db.execute_query("INSERT INTO users (id, name, age) VALUES (1, 'Alice', 30)")
 db.execute_query("INSERT INTO users (id, name, age) VALUES (2, 'Bob', 25)")
 
-# Select records
 results = db.execute_query("SELECT * FROM users WHERE age = 30")
 print(results)
             </code></pre>
-        </section>
+        </article>
 
-        <section id="api" class="mb-8">
-            <h2 class="text-2xl font-semibold">API Reference</h2>
-            <h3 class="text-xl font-semibold">StorageEngine</h3>
-            <p>Handles the storage of data in JSON files.</p>
-            <ul>
-                <li><strong>create_table_file(table_name: str) -> str</strong>: Creates a new table file.</li>
-                <li><strong>write_data(table_name: str, data: List[Dict[str, Any]])</strong>: Writes data to a table file.</li>
-                <li><strong>read_data(table_name: str) -> List[Dict[str, Any]]</strong>: Reads data from a table file.</li>
-            </ul>
+        <article id="api" class="prose prose-lg max-w-none" tabindex="0">
+            <h2>API Reference</h2>
 
-            <h3 class="text-xl font-semibold">QueryParser</h3>
-            <p>Parses SQL-like queries.</p>
-            <ul>
-                <li><strong>parse_create_table(query: str) -> Dict[str, Any]</strong>: Parses CREATE TABLE queries.</li>
-                <li><strong>parse_insert(query: str) -> Dict[str, Any]</strong>: Parses INSERT queries.</li>
-                <li><strong>parse_select(query: str) -> Dict[str, Any]</strong>: Parses SELECT queries.</li>
-            </ul>
+            <section aria-label="StorageEngine class reference">
+                <h3>StorageEngine</h3>
+                <p>Handles all JSON file interactions and persistence mechanics.</p>
+                <ul>
+                    <li><code>create_table_file(table_name: str) → str</code>: Initializes an empty JSON file for a table.</li>
+                    <li><code>write_data(table_name: str, data: List[Dict[str, Any]])</code>: Commits JSON-serializable data to disk.</li>
+                    <li><code>read_data(table_name: str) → List[Dict[str, Any]]</code>: Loads stored JSON data into memory.</li>
+                </ul>
+            </section>
 
-            <h3 class="text-xl font-semibold">DatabaseEngine</h3>
-            <p>Handles the execution of queries and manages tables.</p>
-            <ul>
-                <li><strong>execute_query(query: str) -> Union[List[Dict], None]</strong>: Executes a SQL-like query.</li>
-                <li><strong>_create_table(parsed_query: Dict[str, Any])</strong>: Creates a new table.</li>
-                <li><strong>_insert(parsed_query: Dict[str, Any])</strong>: Inserts data into a table.</li>
-                <li><strong>_select(parsed_query: Dict[str, Any])</strong>: Selects data from a table.</li>
-            </ul>
-        </section>
+            <section aria-label="QueryParser static methods reference">
+                <h3>QueryParser</h3>
+                <p>Static utility methods that parse SQL-like commands into internal structured formats.</p>
+                <ul>
+                    <li><code>parse_create_table(query: str) → Dict[str, Any]</code>: Parses <code>CREATE TABLE</code> queries.</li>
+                    <li><code>parse_insert(query: str) → Dict[str, Any]</code>: Parses <code>INSERT</code> commands.</li>
+                    <li><code>parse_select(query: str) → Dict[str, Any]</code>: Parses <code>SELECT</code> queries, including optional <code>WHERE</code> filters.</li>
+                </ul>
+            </section>
+
+            <section aria-label="DatabaseEngine instance methods reference">
+                <h3>DatabaseEngine</h3>
+                <p>Primary engine interface to execute queries and manage database state.</p>
+                <ul>
+                    <li><code>execute_query(query: str) → Union[List[Dict], None]</code>: Processes SQL-like queries and returns results.</li>
+                    <li><code>_create_table(parsed_query: Dict[str, Any])</code>: Handles table creation logic internally.</li>
+                    <li><code>_insert(parsed_query: Dict[str, Any])</code>: Inserts records after parsing.</li>
+                    <li><code>_select(parsed_query: Dict[str, Any])</code>: Filters and retrieves data as per query.</li>
+                </ul>
+            </section>
+        </article>
     </main>
 
-    <footer class="bg-gray-800 text-white p-4 text-center">
-        <p>&copy; 2025 MonkeyDB. All rights reserved.</p>
+    <footer class="bg-gray-800 text-white p-6 text-center select-none" aria-label="Footer with copyright">
+        <p>
+            &copy; 2025 MonkeyDB. All rights reserved.
+        </p>
     </footer>
 </body>
 </html>
+
